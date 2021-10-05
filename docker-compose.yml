@@ -9,7 +9,8 @@ services:
     volumes:
       #- ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
       - ./wp-app:/var/www/html # Full wordpress project
-      #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
+      # Plugin development
+      - ./new-www-plugin/:/var/www/html/wp-content/plugins/
       # Theme development
       - ./creativecommons-base/:/var/www/html/wp-content/themes/creativecommons-base
       - ./wp-theme-creativecommons.org/:/var/www/html/wp-content/themes/wp-theme-creativecommons.org
