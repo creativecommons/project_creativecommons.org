@@ -81,3 +81,8 @@ Note: you will need to visit http://localhost:8080/wp-login.php
 Once you are logged in with your admin user (above), you can access the WordPress admin area:
 
 - http://localhost:8080/wp-admin/
+
+
+### Activate CC theme and plugins
+
+From the WordPress admin area, you can activate the Creative Commons WordPress theme and plugins.
