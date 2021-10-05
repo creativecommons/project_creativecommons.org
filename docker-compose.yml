@@ -13,6 +13,8 @@ services:
       # Theme development
       - ./creativecommons-base/:/var/www/html/wp-content/themes/creativecommons-base
       - ./wp-theme-creativecommons.org/:/var/www/html/wp-content/themes/wp-theme-creativecommons.org
+      # WordPress import media
+      - ./content/uploads/:/var/www/html/wp-content/uploads
     environment:
       WORDPRESS_DB_HOST: database
       WORDPRESS_DB_NAME: "${DB_NAME}"
