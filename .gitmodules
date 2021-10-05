@@ -4,3 +4,6 @@
 [submodule "wp-theme-creativecommons.org"]
 	path = wp-theme-creativecommons.org
 	url = git@github.com:creativecommons/wp-theme-creativecommons.org.git
+[submodule "new-www-plugin"]
+	path = new-www-plugin
+	url = https://github.com/creativecommons/new-www-plugin.git
