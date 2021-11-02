@@ -8,7 +8,7 @@ services:
       - 8080:80
     volumes:
       #- ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
-       # Full wordpress project
+      # Full wordpress project
       #- ./wp-app:/var/www/html
       # Plugin development
       - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
@@ -22,17 +22,6 @@ services:
       WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD:-db_password}"
     depends_on:
       - database
-    networks:
-      - backend
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: project_creativecommons-phpmyadmin
-    environment:
-      PMA_HOST: database
-      PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-db_password}"
-    ports:
-      - 8081:80
     networks:
       - backend
   database:
