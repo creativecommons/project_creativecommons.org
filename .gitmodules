@@ -19,3 +19,6 @@
 [submodule "cc-legal-tools-data"]
 	path = cc-legal-tools-data
 	url = https://github.com/creativecommons/cc-legal-tools-data
+[submodule "wordpress-seo"]
+	path = wordpress-seo
+	url = https://github.com/shailee-m/wordpress-seo

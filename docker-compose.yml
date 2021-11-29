@@ -46,6 +46,7 @@ services:
       #- ./wp-app:/var/www/html
       # Plugin development
       - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
+      - ./wordpress-seo:/var/www/html/wp-content/plugins/wordpress-seo
       # Theme development
       - ./creativecommons-base/:/var/www/html/wp-content/themes/creativecommons-base
       - ./wp-theme-creativecommons.org/:/var/www/html/wp-content/themes/wp-theme-creativecommons.org
@@ -94,7 +95,7 @@ services:
 
   composer:
     image: composer/composer
-    container_name: cc-base-composer
+    container_name: cc-plugin-composer
     working_dir: /var/www/html/wp-content/plugins/wp-plugin-creativecommons-website/
     command: "install"
     restart: "no"
