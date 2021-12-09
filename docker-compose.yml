@@ -16,7 +16,8 @@ services:
       - ./mp/docs:/var/www/platform/toolkit:ro
       # WordPress Plugin development
       - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
-      # WordPress Theme development
+      - ./wp-yoast-seo-plugin/wp-content/plugins/wordpress-seo:/var/www/html/wp-content/plugins/wordpress-seo
+      # Theme development
       - ./creativecommons-base/:/var/www/html/wp-content/themes/creativecommons-base
       - ./wp-theme-creativecommons.org/:/var/www/html/wp-content/themes/wp-theme-creativecommons.org
     environment:
@@ -66,6 +67,15 @@ services:
     restart: "no"
     volumes:
       - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
+
+  yoast-run:
+    image: composer/composer
+    container_name: yoast-installer
+    command: "install"
+    working_dir: /var/www/html/wp-content/plugins/wordpress-seo
+    restart: "no"
+    volumes:
+      - ./wp-yoast-seo-plugin/:/var/www/html/wp-content/plugins/wordpress-seo
 
 
 volumes:

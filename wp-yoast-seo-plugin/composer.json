@@ -1,0 +1,23 @@
+{
+    "name": "creativecommons/yoast-installer",
+    "autoload": {
+        "psr-4": {
+            "Creativecommons\\YoastInstaller\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shailee Mehta",
+            "email": "mehtashailee21@gmail.com"
+        }
+    ],
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "wpackagist-plugin/wordpress-seo": "^17.7"
+    }
+}
