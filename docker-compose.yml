@@ -62,20 +62,12 @@ services:
   composer:
     image: composer/composer
     container_name: cc-base-composer
-    working_dir: /var/www/html/wp-content/plugins/wp-plugin-creativecommons-website/
-    command: "install"
-    restart: "no"
-    volumes:
-      - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
-
-  yoast-run:
-    image: composer/composer
-    container_name: yoast-installer
-    command: "install"
-    working_dir: /var/www/html/wp-content/plugins/wordpress-seo
+    working_dir: /var/www/html/wp-content/plugins/
+    command: bash -c "cd /var/www/html/wp-content/plugins/wp-plugin-creativecommons-website && composer install && cd /var/www/html/wp-content/plugins/wordpress-seo && composer install"
     restart: "no"
     volumes:
       - ./wp-yoast-seo-plugin/:/var/www/html/wp-content/plugins/wordpress-seo
+      - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
 
 
 volumes:
