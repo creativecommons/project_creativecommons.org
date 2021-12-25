@@ -25,6 +25,10 @@ services:
       WORDPRESS_DB_NAME: "${DB_NAME:-wordpress_db}"
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD:-db_password}"
+      WORDPRESS_CONFIG_EXTRA: |
+        # Use dispatch port by default
+        define('WP_HOME', 'http://127.0.0.1:8000');
+        define('WP_SITEURL', 'http://127.0.0.1:8000');
     depends_on:
       - database
     networks:
