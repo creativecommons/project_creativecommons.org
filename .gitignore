@@ -1,3 +1,5 @@
 wp-app/
 .env
 .DS_Store
+vendor/
+wp-content/

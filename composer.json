@@ -1,0 +1,31 @@
+{
+  "description": "Creative Commons Chapters WordPress Site via Composer",
+  "extra": {
+    "wordpress-install-dir": "wp"
+  },
+  "name": "creativecommons/wordpress-chapters",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "no-api": true,
+      "type": "vcs",
+      "url": "https://github.com/creativecommons/wp-theme-base"
+    },
+    {
+      "no-api": true,
+      "type": "vcs",
+      "url": "https://github.com/creativecommons/wp-theme-creativecommons.org"
+    }
+  ],
+  "require": {
+    "composer/installers": "1.9",
+    "wpackagist-plugin/wordpress-importer": "0.7",
+    "wpackagist-plugin/wordpress-seo": "14.1",
+    "wpackagist-plugin/ultimate-addons-for-gutenberg": "^1.25",
+    "creativecommons/wp-theme-creativecommons.org": "^2022.02"
+  },
+  "type": "project"
+}

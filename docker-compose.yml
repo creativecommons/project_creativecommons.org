@@ -16,9 +16,8 @@ services:
       - ./mp/docs:/var/www/platform/toolkit:ro
       # WordPress Plugin development
       - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
-      # WordPress Theme development
-      - ./creativecommons-base/:/var/www/html/wp-content/themes/creativecommons-base
-      - ./wp-theme-creativecommons.org/:/var/www/html/wp-content/themes/wp-theme-creativecommons.org
+      - ./composer.json:/var/www/html/wp-content/composer.json
+      - ./composer.lock:/var/www/html/wp-content/composer.lock
       - wp_data:/var/www/html
 
     environment:
@@ -67,18 +66,31 @@ services:
   composer:
     image: composer/composer
     container_name: cc-base-composer
-    working_dir: /var/www/html/wp-content/plugins/wp-plugin-creativecommons-website/
-    command: "install"
+    working_dir: /var/www/html/wp-content
+    command: bash -c "cd /var/www/html/wp-content/plugins/wp-plugin-creativecommons-website && composer install"
     restart: "no"
+    environment:
+      - R=1
     volumes:
       - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
+  web:
+    build: .
+    depends_on:
+      - wordpress
+    volumes:
+      - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
+    command: npm run build
 
   wordpress-cli:
     volumes_from:
       - database
+      - composer
       - wordpress
     image: wordpress:cli
     user: xfs
+    working_dir: /var/www/html/wp-content
+    depends_on:
+      - composer
     environment:
       WORDPRESS_DB_HOST: database
       WORDPRESS_DB_NAME: "${DB_NAME:-wordpress_db}"
@@ -86,7 +98,7 @@ services:
       WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD:-db_password}"
     command:  >
       /bin/sh -c '
-      wp plugin install wordpress-seo && wp plugin activate wordpress-seo && wp plugin install ultimate-addons-for-gutenberg && wp plugin activate ultimate-addons-for-gutenberg
+      while [[ "$$R" != 1 ]] ;  do echo "${R} not yet!!!!!"; sleep 5; done && echo "composer finished!" && wp plugin activate --all && wp theme activate wp-theme-creativecommons.org
       '
     volumes:
       - wp_data:/var/www/html
