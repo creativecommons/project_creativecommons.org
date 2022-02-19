@@ -63,6 +63,15 @@ services:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-db_password}"
     networks:
       - backend
+  node:
+    build: .
+    command: >
+      /bin/sh -c '
+      rm -rf build && npm install && npm run build
+      '
+    volumes:
+      - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
+      - /var/www/html/wp-content/plugins/wp-plugin-creativecommons-website/node_modules
 
   composer:
     image: composer/composer
@@ -77,6 +86,7 @@ services:
     volumes_from:
       - database
       - wordpress
+      - node
     image: wordpress:cli
     user: xfs
     environment:
@@ -86,11 +96,13 @@ services:
       WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD:-db_password}"
     command:  >
       /bin/sh -c '
+      while ! test -f "/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website/build/index.js" ; do echo "waiting" ; sleep 10 ; done ;
       wp plugin install wordpress-seo && wp plugin activate wordpress-seo && wp plugin install ultimate-addons-for-gutenberg && wp plugin activate ultimate-addons-for-gutenberg
       '
     volumes:
       - wp_data:/var/www/html
       - db_data:/var/lib/mysql
+      - ./wp-plugin-creativecommons-website/:/var/www/html/wp-content/plugins/wp-plugin-creativecommons-website
       - ./content-import:/var/www/html/content-import
     networks:
       - backend
